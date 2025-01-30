@@ -4,7 +4,7 @@ const secret = "AnyThin$#@9837_ab"
 
 export const generateToken = (payload)=>{
     return jwt.sign(payload, secret, {
-        expiresIn:'1h',
+        expiresIn:'10d',
     })
 }
 

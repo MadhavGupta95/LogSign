@@ -7,6 +7,7 @@ import express from "express";
 // import { isAuthorized } from "./middleware/middleware.js";
 import authRoutes from "./routes/auth.js"
 import todoRoutes from "./routes/todo.js"
+import pagesRoutes from "./routes/pages.js"
 
 const port = 3300;
 
@@ -15,6 +16,7 @@ app.use(express.json());
 
 app.use('/api/auth', authRoutes)
 app.use('/api/todos', todoRoutes)
+app.use('/', pagesRoutes)
 
 
 
