@@ -17,6 +17,7 @@
     "express": "^4.21.2",
     "fs": "^0.0.1-security",
     "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.9.6",
     "path": "^0.12.7",
     "uuid": "^11.0.5"
   },

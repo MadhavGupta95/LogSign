@@ -1,1 +1,14 @@
-[{"id":"462ae3fb-a29b-4f7d-87ff-3db0bb659a73","username":"madhav2","email":"mail2@mail.com","password":"$2b$10$czHVulRWZHJf.nnBTmH7Ie.RrrdkXd9DBjL1v/IeFnJ51hnYAwgF."},{"id":"c4aa19c4-cb31-440b-90d7-ea5b4e2d7077","username":"buga","email":"buga@mail.com","password":"$2b$10$.iiwkfpp98fA7DeIgOyjIOlMWSJlB6fywd2O5Oh98r6qoiWmFbo6G"},{"id":"3f49b738-6394-4342-93ae-c4de77779be1","username":"asdf","email":"asdf@mail.com","password":"$2b$10$Hdn5kYiugWFGM9qbnC8nIO5g4kBciEyDzhOH9vRgoAd0She6MIMNy"}]
+[
+  {
+    "id": "462ae3fb-a29b-4f7d-87ff-3db0bb659a73",
+    "username": "madhav2",
+    "email": "mail2@mail.com",
+    "password": "$2b$10$czHVulRWZHJf.nnBTmH7Ie.RrrdkXd9DBjL1v/IeFnJ51hnYAwgF."
+  },
+  {
+    "id": "c4aa19c4-cb31-440b-90d7-ea5b4e2d7077",
+    "username": "buga",
+    "email": "buga@mail.com",
+    "password": "$2b$10$.iiwkfpp98fA7DeIgOyjIOlMWSJlB6fywd2O5Oh98r6qoiWmFbo6G"
+  }
+]
