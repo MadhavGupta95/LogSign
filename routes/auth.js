@@ -4,6 +4,7 @@ import fs from "fs/promises";
 import bcrypt from "bcrypt";
 import { addToDb } from "../utils/adtodb.js";
 import { generateToken } from "../utils/jwt.js";
+import { User } from "../db/models/User.js";
 
 
 const router = express.Router()
@@ -12,40 +13,46 @@ router.post("/signup", async (req, res) => {
   try {
     // validate the user
     const { username, email, password } = req.body;
-    if (!username || !email || !password) {
-      return res.status(400).json({
-        message: "Please provide all the details",
-        success: false,
-      });
-    }
-    // check if user email exists
-    const user = await fs.readFile("./db/user.json", "utf-8");
-    const parsedUsers = JSON.parse(user);
-    if (parsedUsers.find((user) => user.email === email)) {
-      return res.status(400).json({
-        message: "Email already exists",
-        success: false,
-      });
-    }
+    
+    // if (!username || !email || !password) {
+    //   return res.status(400).json({
+    //     message: "Please provide all the details",
+    //     success: false,
+    //   });
+    // }
+    // // check if user email exists
+    // const user = await fs.readFile("./db/user.json", "utf-8");
+    // const parsedUsers = JSON.parse(user);
+    // if (parsedUsers.find((user) => user.email === email)) {
+    //   return res.status(400).json({
+    //     message: "Email already exists",
+    //     success: false,
+    //   });
+    // }
 
-    // validate the username
-    if (parsedUsers.find((user) => user.username === username)) {
-      return res.status(400).json({
-        message: "Username already exists",
-        success: false,
-      });
-    }
+    // // validate the username
+    // if (parsedUsers.find((user) => user.username === username)) {
+    //   return res.status(400).json({
+    //     message: "Username already exists",
+    //     success: false,
+    //   });
+    // }
 
     //if all good, add to db
     const salt = await bcrypt.genSalt(10);
     const hashedPass = await bcrypt.hash(password, salt);
-    const newUser = {
-      id: uuidv4(),
+    const newUser = await User.create({
       username,
       email,
       password: hashedPass,
-    };
-    await addToDb(newUser, "./db/user.json");
+    })
+    // const newUser = {
+    //   id: uuidv4(),
+    //   username,
+    //   email,
+    //   password: hashedPass,
+    // };
+    // await addToDb(newUser, "./db/user.json");
     return res.json({
       data: {
         ...newUser,
@@ -57,6 +64,7 @@ router.post("/signup", async (req, res) => {
     return res.status(500).json({
       message: "internal server error",
       success: false,
+      error: error.message
     });
   }
 });
@@ -73,9 +81,10 @@ router.post("/login", async (req, res) => {
     }
 
     //Authenticate the user
-    const users = await fs.readFile("./db/user.json", "utf-8");
-    const parsedUsers = JSON.parse(users);
-    const user = await parsedUsers.find((user) => user.email === email);
+    // const users = await fs.readFile("./db/user.json", "utf-8");
+    // const parsedUsers = JSON.parse(users);
+    // const user = await parsedUsers.find((user) => user.email === email);
+    const user = await User.findOne/*takes parameters*/({email})/*here, the paramter is that i want the user with particular email. */
     if (!user) {
       return res.status(400).json({
         message: "Invalid Email",
