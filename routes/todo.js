@@ -94,7 +94,7 @@ router.patch("/:id", isAuthorized, async (req, res) => {
     //         success:false
     //     })
     // }
-    const todo = Todo.findOne({ _id: todoID });
+    const todo = await Todo.findOne({ _id: todoID });
     // check if todo belongs to user
     if (todo.userID !== user.id) {
       return res.status(401).json({

@@ -12,7 +12,6 @@ export const isAuthorized = async(req, res, next)=>{
     }
     req.user = decodedToken
     next()
-        
     } catch (error) {
         console.log(error);
         return res.json({

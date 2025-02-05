@@ -6,14 +6,13 @@ import { addToDb } from "../utils/adtodb.js";
 import { generateToken } from "../utils/jwt.js";
 import { User } from "../db/models/User.js";
 
-
-const router = express.Router()
+const router = express.Router();
 
 router.post("/signup", async (req, res) => {
   try {
     // validate the user
     const { username, email, password } = req.body;
-    
+
     // if (!username || !email || !password) {
     //   return res.status(400).json({
     //     message: "Please provide all the details",
@@ -45,7 +44,7 @@ router.post("/signup", async (req, res) => {
       username,
       email,
       password: hashedPass,
-    })
+    });
     // const newUser = {
     //   id: uuidv4(),
     //   username,
@@ -64,7 +63,7 @@ router.post("/signup", async (req, res) => {
     return res.status(500).json({
       message: "internal server error",
       success: false,
-      error: error.message
+      error: error.message,
     });
   }
 });
@@ -84,7 +83,9 @@ router.post("/login", async (req, res) => {
     // const users = await fs.readFile("./db/user.json", "utf-8");
     // const parsedUsers = JSON.parse(users);
     // const user = await parsedUsers.find((user) => user.email === email);
-    const user = await User.findOne/*takes parameters*/({email})/*here, the paramter is that i want the user with particular email. */
+    const user = await User.findOne(
+      /*takes parameters*/ { email }
+    ); /*here, the paramter is that i want the user with particular email. */
     if (!user) {
       return res.status(400).json({
         message: "Invalid Email",
@@ -101,9 +102,9 @@ router.post("/login", async (req, res) => {
 
     const token = generateToken({
       username: user.username,
-      email:user.email,
-      id:user._id
-    })
+      email: user.email,
+      id: user._id,
+    });
     return res.json({
       data: {
         token,
@@ -132,4 +133,4 @@ router.post("/login", async (req, res) => {
 //   }
 // })
 
-export default router
+export default router;

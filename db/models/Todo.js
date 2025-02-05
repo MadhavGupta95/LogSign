@@ -8,7 +8,6 @@ const TodoSchema = new mongoose.Schema({
     required: true,
     trim: true,
     maxlength: 50,
-    minlength: 1,
   },
   completed: {
     type: Boolean,
@@ -16,7 +15,7 @@ const TodoSchema = new mongoose.Schema({
   },
   userID: {
     type: mongoose.Schema.Types.ObjectId,
-    ref /*reference*/: "User",
+    ref /*reference*/: 'User',
   },
 });
 
